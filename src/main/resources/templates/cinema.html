@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Cinema</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body class="container py-5">
+
+    <!--   <form th:action="@{/logout}" method="post" style="float:right;">
+        <button type="submit" class="btn btn-secondary">Logout</button>
+    </form> -->
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 th:text="${screenings[0].cinema.name}">Cinema</h1>
+            <p class="text-muted">Movies currently shown in this cinema</p>
+        </div>
+        <a th:href="@{/}" class="btn btn-outline-secondary">Back</a>
+        <a th:href="@{/addmovie(city=${city})}" class="btn btn-success">Add screening</a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4" th:each="screening : ${screenings}">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title" th:text="${screening.movie.title}">Movie title</h4>
+
+                    <p class="card-text mb-1">
+                        <strong>Director:</strong>
+                        <span th:text="${screening.movie.director}">Director</span>
+                    </p>
+
+                    <p class="card-text mb-1">
+                        <strong>Year:</strong>
+                        <span th:text="${screening.movie.publicationYear}">2024</span>
+                    </p>
+
+                    <p class="card-text mb-1">
+                        <strong>Duration:</strong>
+                        <span th:text="${screening.movie.duration}">120</span> min
+                    </p>
+
+                    <p class="card-text mb-1">
+                        <strong>Genre:</strong>
+                        <span th:text="${screening.movie.genre.name}">Drama</span>
+                    </p>
+
+                    <p class="card-text mb-1">
+                        <strong>Cinema:</strong>
+                        <span th:text="${screening.cinema.name}">Cinema name</span>
+                    </p>
+
+                    <p class="card-text">
+                        <strong>Start time:</strong>
+                        <span th:text="${#temporals.format(screening.startTime, 'dd.MM.yyyy HH:mm')}"></span>
+                    </p>
+
+                    <div class="d-flex gap-2">
+                        <a th:href="@{/editmovie/{id}(id=${screening.movie.id})}" class="btn btn-success">Edit</a>
+
+                        <form th:action="@{/deletescreening/{id}(id=${screening.id})}" method="post"
+                            style="display:inline;">
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Delete this screening?')">
+                                Delete
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+
+</html>

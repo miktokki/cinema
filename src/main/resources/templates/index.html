@@ -7,10 +7,22 @@
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
 </head>
 
-<body>
-    <form th:action="@{/logout}" method="post" style="float:right;">
+<body class="container py-5">
+    <h1 class="mb-4">Welcome</h1>
+    <p>Select a cinema:</p>
+
+    <!--    <form th:action="@{/logout}" method="post" style="float:right;">
         <button type="submit" class="btn btn-secondary">Logout</button>
-    </form>
+    </form> -->
+
+    <div class="d-flex gap-3">
+        <a class="btn btn-dark" th:href="@{/cinema/helsinki}">Tennispalatsi, Helsinki</a>
+        <a class="btn btn-dark" th:href="@{/cinema/tampere}">Plevna, Tampere</a>
+        <a class="btn btn-dark" th:href="@{/cinema/turku}">Kinopalatsi, Turku</a>
+    </div>
+
+
+
 </body>
 
 </html>
