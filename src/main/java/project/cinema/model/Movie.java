@@ -11,28 +11,28 @@ public class Movie {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Kirjoita elokuvan nimi")
-    @Size(min = 3, max = 100, message = "Otsikon pituus 3-100 merkkiä")
+    @NotBlank(message = "Write the movie title")
+    @Size(min = 3, max = 100, message = "Title length must be between 3 and 100 characters")
     private String title;
 
-    @NotBlank(message = "Kirjoita ohjaajan nimi")
-    @Size(min = 3, max = 100, message = "3-100 merkkiä")
+    @NotBlank(message = "Write the director’s name")
+    @Size(min = 3, max = 100, message = "Must be 3–100 characters")
     private String director;
 
-    @NotNull(message = "Kirjoita julkaisuvuosi")
+    @NotNull(message = "Enter the release year")
     @Min(value = 1000)
     @Max(value = 9999)
     private int publicationYear;
 
-    @Min(value = 1, message = "Keston pitää olla vähintään yksi minuutti")
-    @Max(value = 500, message = "Elokuvan kesto saa olla korkeintaan 500")
+    @Min(value = 1, message = "Duration must be at least one minute")
+    @Max(value = 500, message = "The movie duration can be at most 500 minutes")
     private int duration;
 
-    @DecimalMin(value = "0.0", inclusive = false, message = "Hinnan pitää olla positiivinen")
-    @DecimalMax(value = "100.0", message = "Hinta liian suuri")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be positive")
+    @DecimalMax(value = "100.0", message = "Price is too high")
     private double price;
 
-    @NotNull(message = "Valitse genre")
+    @NotNull(message = "Select a genre")
     @JsonIgnoreProperties("movies")
     @ManyToOne
     @JoinColumn(name = "genre_id")

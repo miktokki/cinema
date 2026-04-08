@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import project.cinema.model.AppUser;
 import project.cinema.model.AppUserRepository;
 import project.cinema.model.Cinema;
 import project.cinema.model.CinemaRepository;
@@ -57,11 +58,19 @@ public class CinemaApplication {
 				cinRepository.save(tampere);
 				cinRepository.save(turku);
 
-				scrRepository.save(new Screening(movie1, helsinki, LocalDateTime.of(2026, 4, 7, 18, 0)));
-				scrRepository.save(new Screening(movie2, helsinki, LocalDateTime.of(2026, 4, 7, 21, 0)));
-				scrRepository.save(new Screening(movie3, tampere, LocalDateTime.of(2026, 4, 7, 19, 30)));
-				scrRepository.save(new Screening(movie1, turku, LocalDateTime.of(2026, 4, 7, 20, 15)));
-				scrRepository.save(new Screening(movie3, turku, LocalDateTime.of(2026, 4, 8, 18, 45)));
+				scrRepository.save(new Screening(movie1, helsinki, LocalDateTime.of(2026, 4, 7, 18, 0), 10));
+				scrRepository.save(new Screening(movie2, helsinki, LocalDateTime.of(2026, 4, 7, 21, 0), 20));
+				scrRepository.save(new Screening(movie3, tampere, LocalDateTime.of(2026, 4, 7, 19, 30), 25));
+				scrRepository.save(new Screening(movie1, turku, LocalDateTime.of(2026, 4, 7, 20, 15), 8));
+				scrRepository.save(new Screening(movie3, turku, LocalDateTime.of(2026, 4, 8, 18, 45), 15));
+
+				AppUser user = new AppUser("user", "$2a$12$AwjmN6V1ZBUI1RAnb6NBOOqukQmP3lVY9KBBxV.zyet9Ya5y4i4wa",
+						"USER");
+				AppUser admin = new AppUser("admin", "$2a$12$AzTeKcT2AHXUYBkAuoHze.Kd6P8ItAfZdsAM4oGD8V9N8Yi.jpENm",
+						"ADMIN");
+
+				auRepository.save(user);
+				auRepository.save(admin);
 
 			}
 		};

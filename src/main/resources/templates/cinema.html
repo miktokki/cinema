@@ -9,16 +9,19 @@
 
 <body class="container py-5">
 
-    <!--   <form th:action="@{/logout}" method="post" style="float:right;">
-        <button type="submit" class="btn btn-secondary">Logout</button>
-    </form> -->
+    <div>
+        <a th:href="@{/}" class="btn btn-outline-secondary">Back</a>
+    </div>
+
+    <form th:action="@{/logout}" method="post" style="float:inline-end;">
+        <button type="submit" class="btn btn-secondary btn-lg ms-auto d-block">Logout</button>
+    </form>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 th:text="${screenings[0].cinema.name}">Cinema</h1>
+            <h1 th:text="${screenings[0].cinema.name} + ', ' + ${screenings[0].cinema.city}">Cinema</h1>
             <p class="text-muted">Movies currently shown in this cinema</p>
         </div>
-        <a th:href="@{/}" class="btn btn-outline-secondary">Back</a>
         <a th:href="@{/addmovie(city=${city})}" class="btn btn-success">Add screening</a>
     </div>
 
@@ -58,12 +61,18 @@
                         <span th:text="${#temporals.format(screening.startTime, 'dd.MM.yyyy HH:mm')}"></span>
                     </p>
 
+                    <p class="card-text mb-1">
+                        <strong>Capacity:</strong>
+                        <span th:text="${screening.capacity} + '/100'">Capacity</span>
+                    </p>
+
                     <div class="d-flex gap-2">
-                        <a th:href="@{/editmovie/{id}(id=${screening.movie.id})}" class="btn btn-success">Edit</a>
+                        <a th:href="@{/editmovie/{id}(id=${screening.movie.id})}" class="btn btn-success"
+                            sec:authorize="hasAuthority('ADMIN')">Edit</a>
 
                         <form th:action="@{/deletescreening/{id}(id=${screening.id})}" method="post"
                             style="display:inline;">
-                            <button type="submit" class="btn btn-danger"
+                            <button type="submit" class="btn btn-danger" sec:authorize="hasAuthority('ADMIN')"
                                 onclick="return confirm('Delete this screening?')">
                                 Delete
                             </button>

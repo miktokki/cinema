@@ -19,13 +19,16 @@ public class Screening {
 
     private LocalDateTime startTime;
 
+    private int capacity;
+
     public Screening() {
     }
 
-    public Screening(Movie movie, Cinema cinema, LocalDateTime startTime) {
+    public Screening(Movie movie, Cinema cinema, LocalDateTime startTime, int capacity) {
         this.movie = movie;
         this.cinema = cinema;
         this.startTime = startTime;
+        this.capacity = capacity;
     }
 
     public Long getId() {
@@ -60,9 +63,18 @@ public class Screening {
         this.startTime = startTime;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     @Override
     public String toString() {
-        return "Screening [id=" + id + ", movie=" + movie + ", cinema=" + cinema + ", startTime=" + startTime + "]";
+        return "Screening [id=" + id + ", movie=" + movie + ", cinema=" + cinema + ", startTime=" + startTime
+                + ", capacity=" + capacity + "]";
     }
 
 }

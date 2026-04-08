@@ -47,20 +47,13 @@ public class MovieController {
 
     @PostMapping("/savemovie")
     public String saveMovie(@Valid @ModelAttribute Movie movie, BindingResult bindingResult,
-            @RequestParam String city, @RequestParam String startTime, Model model) {
+            Model model) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("genres", genRepository.findAll());
-            model.addAttribute("city", city);
+            // model.addAttribute("genres", genRepository.findAll());
             return "addmovie";
         }
 
-        Movie savedMovie = movRepository.save(movie);
-        Cinema cinema = cinRepository.findByCityIgnoreCase(city).get(0);
-        Screening screening = new Screening();
-        screening.setMovie(savedMovie);
-        screening.setCinema(cinema);
-        screening.setStartTime(LocalDateTime.parse(startTime));
-        scrRepository.save(screening);
+        movRepository.save(movie);
         return "redirect:/";
     }
 
